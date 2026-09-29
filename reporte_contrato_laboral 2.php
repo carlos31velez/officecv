@@ -119,7 +119,7 @@ $pdf->SetFont('helvetica', 'B', 9);
 $denominacion = ($genero=='1') ? 'EL PROFESOR' : 'LA PROFESORA';
 
 $anio = date("Y");
-#EMPIEZA DOCENTE TIPO 1 opc_categoria_empleado y que sea plazo fijo  opc_documentos_relacion_laboral=9 CONTRATO PLAZO FIJO el 1 es CONTRATO INDEFINIDO
+#EMPIEZA DOCENTE TIPO 1 opc_categoria_empleado y que sea plazo fijo  opc_documentos_relacion_laboral=9 CONTRATO PLAZO FIJO
 if($id_tipo_contrato==5 || $id_documento_relacion_laboral==9){
     $pdf->SetFont('helvetica', 'B', 10);
     $pdf->Cell(0, 6, utf8_decode("CONTRATO ESPECIAL DE TRABAJO PARA LA EDUCACIÓN SUPERIOR PARTICULAR"), 0, 0, 'C');
@@ -395,7 +395,203 @@ $pdf->MultiCell(0, 5, utf8_decode('Adicionalmente, EL PERSONAL ACADÉMICO recono
     $pdf->Cell(70, 4, utf8_decode("C.I.: ".$documento), 0, 2, 'L');
     $pdf->Cell(70, 4, utf8_decode("EL PERSONAL ACADÉMICO"), 0, 2, 'L');
     
-#AQUI TERMINA EL TIPO 1
+#AQUI TERMINA EL TIPO 1 PLAZO FIJO 
+
+#EMPIEZA DOCENTE TIPO 1 opc_categoria_empleado CONTRATO INDEFINIDO
+if($id_tipo_contrato==5 || $id_documento_relacion_laboral==1){
+    $pdf->SetFont('helvetica', 'B', 10);
+    $pdf->Cell(0, 6, utf8_decode("CONTRATO ESPECIAL DE TRABAJO PARA LA EDUCACIÓN SUPERIOR PARTICULAR"), 0, 0, 'C');
+    $pdf->Ln(4);
+    $pdf->Cell(0, 6, utf8_decode("POR TIEMPO INDEFINIDO"), 0, 0, 'C');
+    $pdf->Ln(4);
+    $pdf->SetFont('helvetica', 'B', 9);
+    $pdf->Cell(0, 6, utf8_decode($cargo." ".preg_replace('/\s\d+$/', '', $tipo_contrato)." A ".$tiempo_dedicacion), 0, 0, 'C');
+    $pdf->Ln(4);
+    $pdf->Cell(0, 6, utf8_decode("CÓDIGO SECTORIAL No. 2013803001032"), 0, 0, 'C');
+    $pdf->Ln(4);
+    $pdf->Cell(0, 6, utf8_decode("PUCEM-C-PA-".$anio."-".str_pad($codigo_contrato, 3, "0", STR_PAD_LEFT)), 0, 0, 'C');
+  
+    $pdf->SetMargins(20, 0);
+
+    $pdf->Ln(12);
+    $pdf->SetFont('helvetica', 'B', 9);
+    $pdf->Cell(0, 6, utf8_decode("COMPARECIENTES:"), 0, 0, 'L');
+    $pdf->Ln(6);
+    $pdf->SetFont('helvetica', '', 9);
+    $pdf->MultiCell(0, 5, utf8_decode('Comparecen a la celebración del presente contrato individual de trabajo, por una parte, la Pontificia Universidad Católica del Ecuador, Sede Manabí, legalmente representada por su Prorrector Dr. José Luis Cagigal García, a quien en adelante se le denominará "LA UNIVERSIDAD"; y, por otra parte, '.(($tratamiento!='') ? $tratamiento.' ' : '').$nombres.' '.$apellidos_paternos.' '.$apellidos_maternos.', portador(a) de la cédula de ciudadanía No. '.$documento.', a quien en adelante se le denominará "EL PERSONAL ACADÉMICO".'), 'J');
+    $pdf->Ln(6);
+    $pdf->MultiCell(0, 5, utf8_decode('Las partes comparecientes, libre y voluntariamente, convienen en celebrar el presente contrato de trabajo, al tenor de las siguientes cláusulas:'), 'J');
+    $pdf->Ln(6);
+
+    $pdf->Ln(1);
+    $pdf->SetFont('helvetica', 'B', 9);
+    $pdf->Cell(0, 6, utf8_decode("PRIMERA. - ANTECEDENTES:"), 0, 0, 'L');
+    $pdf->Ln(7);
+    $pdf->SetFont('helvetica', '', 9);
+    $pdf->SetX(25);
+    $pdf->MultiCell(0, 5, utf8_decode("a) LA UNIVERSIDAD es una persona jurídica de derecho privado, sin fines de lucro, que se rige por la normativa vigente y por su Estatuto institucional, y se halla identificada con los principios fundamentales de la doctrina católica."), 'J');
+    $pdf->SetX(25);
+    $pdf->MultiCell(0, 5, utf8_decode("b) Para el desarrollo de sus labores académicas, de investigación, vinculación y gestión académica, LA UNIVERSIDAD requiere contar con personal académico idóneo y calificado que garantice el adecuado desenvolvimiento de sus actividades y la consecución de sus fines institucionales."), 'J');
+    $pdf->SetX(25);
+    $pdf->MultiCell(0, 5, utf8_decode("c) EL PERSONAL ACADÉMICO declara reunir los requisitos exigidos por LA UNIVERSIDAD para el ejercicio de actividades académicas, de investigación, vinculación y gestión educativa, y manifiesta conocer y aceptar los principios y la normativa institucional."), 'J');
+    $pdf->Ln(6);
+
+    $pdf->SetFont('helvetica', 'B', 9);
+    $pdf->Cell(0, 6, utf8_decode("SEGUNDA. - OBJETO:"), 0, 0, 'L');
+    $pdf->Ln(6);
+    $pdf->SetFont('helvetica', '', 9);
+    $pdf->MultiCell(0, 5, utf8_decode('EL PERSONAL ACADÉMICO se obliga a prestar sus servicios lícitos y personales a favor de LA UNIVERSIDAD, en calidad de '.$cargo.' '.preg_replace('/\s\d+$/', '', $tipo_contrato).' A '.$tiempo_dedicacion.', para el desarrollo de actividades académicas, de investigación, vinculación, y gestión educativa, en '.(($carrera == 'VARIAS') ? 'la '.$escuela : (($carrera != 'VARIAS CARRERAS') ? 'la carrera de '.$carrera : 'la '.$escuela)).', pudiendo realizar dichas actividades en otras escuelas, carreras o programas, de acuerdo con las necesidades institucionales y las disposiciones de LA UNIVERSIDAD.'), 'J');
+    $pdf->Ln(6);
+
+    $pdf->SetFont('helvetica', 'B', 9);
+    $pdf->Cell(0, 6, utf8_decode("TERCERA. - LUGAR Y MODO DE EJECUCIÓN:"), 0, 0, 'L');
+    $pdf->Ln(6);
+    $pdf->SetFont('helvetica', '', 9);
+    $pdf->MultiCell(0, 5, utf8_decode('EL PERSONAL ACADÉMICO realizará sus actividades en la Pontificia Universidad Católica del Ecuador, Sede Manabí, en los campus que determine LA UNIVERSIDAD, de acuerdo con las necesidades institucionales. EL PERSONAL ACADÉMICO podrá desarrollar actividades académicas en modalidad presencial, virtual o híbrida, cuando así lo disponga LA UNIVERSIDAD, de conformidad con la normativa aplicable.'), 'J');
+    $pdf->Ln(10);
+
+    $pdf->SetFont('helvetica', 'B', 9);
+    $pdf->Cell(0, 6, utf8_decode("CUARTA. - OBLIGACIONES ESPECÍFICAS DEL PERSONAL ACADÉMICO:"), 0, 0, 'L');
+    $pdf->Ln(6); 
+    $pdf->MultiCell(0, 5,utf8_decode('A más de las establecidas en las leyes correspondientes y los Reglamentos Interno y de Profesores de la PUCEM, son obligaciones específicas de '.$denominacion.' las siguientes:'), 'J');
+    $pdf->Ln(1);
+    $pdf->SetFont('helvetica', '', 9);
+    $pdf->MultiCell(0, 5, utf8_decode('Además de las obligaciones establecidas en la legislación aplicable, en el Reglamento Interno y demás normativa institucional de LA UNIVERSIDAD, son obligaciones específicas de EL PERSONAL ACADÉMICO las siguientes:'), 'J');
+    $pdf->Ln(6);
+    $pdf->SetFont('helvetica', '', 9);
+    $pdf->SetX(25);
+    $pdf->MultiCell(0, 5, utf8_decode("a) Cumplir con responsabilidad, diligencia y ética profesional las obligaciones y funciones inherentes a su cargo."), 'J');
+    $pdf->Ln(1);
+    $pdf->SetX(25);
+    $pdf->MultiCell(0, 5, utf8_decode("b) Observar las disposiciones contenidas en el Código del Trabajo, reglamentos internos, políticas y normativa institucional."), 'J');
+    $pdf->Ln(1);
+    $pdf->SetX(25);
+    $pdf->MultiCell(0, 5, utf8_decode("c) Prestar sus servicios manteniendo el nivel de eficiencia requerido para el adecuado desempeño de sus funciones."), 'J');
+    $pdf->Ln(1);
+    $pdf->SetX(25);
+    $pdf->MultiCell(0, 5, utf8_decode("d) Observar normas éticas y morales en sus relaciones con autoridades, compañeros, estudiantes y demás miembros de la comunidad universitaria."), 'J');
+    $pdf->Ln(1);
+    $pdf->SetX(25);
+    $pdf->MultiCell(0, 5, utf8_decode("e) Informar oportunamente a las autoridades de LA UNIVERSIDAD sobre cualquier hecho o situación que pudiere afectar a la institución, a sus miembros o a sus bienes."), 'J');
+    $pdf->Ln(1);
+    $pdf->SetX(25);
+    $pdf->MultiCell(0, 5, utf8_decode("f) Reconocer los derechos institucionales de LA UNIVERSIDAD respecto de los trabajos, investigaciones o resultados que se generen en el marco de sus actividades académicas o laborales."), 'J');
+    $pdf->Ln(1);
+    $pdf->SetX(25);
+    $pdf->MultiCell(0, 5, utf8_decode("g) Programar y dictar la cátedra en los horarios aprobados por la respectiva unidad académica y conforme al distributivo académico asignado."), 'J');
+    $pdf->Ln(1);
+    $pdf->SetX(25);
+    $pdf->MultiCell(0, 5, utf8_decode("h) Someterse a los mecanismos de control de asistencia, evaluación de desempeño y demás procedimientos establecidos por LA UNIVERSIDAD."), 'J');
+    $pdf->Ln(1);
+    $pdf->SetX(25);
+    $pdf->MultiCell(0, 5, utf8_decode("i) Ejecutar otras obligaciones y funciones inherentes a la naturaleza de su cargo y competencia, asignadas por su inmediato superior o establecidas en la normativa institucional vigente."), 'J');
+    $pdf->Ln(6);
+    $pdf->SetFont('helvetica', '', 9);
+    $pdf->MultiCell(0, 5, utf8_decode('De conformidad con la normativa aplicable al personal académico del Sistema de Educación Superior, EL PERSONAL ACADÉMICO, en función del distributivo académico del período en curso, aprobado por LA UNIVERSIDAD, desarrollará actividades relacionadas con docencia, investigación, vinculación con la sociedad y/o gestión educativa.'), 'J');
+    $pdf->Ln(6);
+
+    $pdf->SetFont('helvetica', 'B', 9);
+    $pdf->Cell(0, 6, utf8_decode("QUINTA. - JORNADA DE TRABAJO:"), 0, 0, 'L');
+    $pdf->Ln(6);
+    $pdf->SetFont('helvetica', '', 9);
+    $pdf->MultiCell(0, 5, utf8_decode('EL PERSONAL ACADÉMICO se obliga a prestar sus servicios a tiempo completo, en una jornada de ocho (8) horas diarias, de lunes a viernes, en el horario comprendido de '.$horario_laboral_inicio.' a '.$horario_laboral_fin.', con un receso de sesenta (60) minutos destinados al almuerzo, de conformidad con los límites establecidos en la legislación laboral vigente.'), 'J');
+    $pdf->Ln(6);
+    $pdf->MultiCell(0, 5, utf8_decode('Adicionalmente, EL PERSONAL ACADÉMICO reconoce el derecho de LA UNIVERSIDAD a modificar los horarios y condiciones de trabajo, de acuerdo con las necesidades institucionales, siempre que dichos cambios no excedan los límites legales o contractuales y sean comunicados oportunamente.'), 'J');
+    $pdf->Ln(6);
+
+    $pdf->SetFont('helvetica', 'B', 9);
+    $pdf->Cell(0, 6, utf8_decode("SEXTA. - REMUNERACIÓN Y FORMA DE PAGO:"), 0, 0, 'L');
+    $pdf->Ln(6);
+    $pdf->SetFont('helvetica', '', 9);
+    $pdf->MultiCell(0, 5, utf8_decode('LA UNIVERSIDAD pagará a EL PERSONAL ACADÉMICO una remuneración mensual de USD $'.number_format($sueldo, 2).' ('.numero_a_letras($sueldo).'), convenida de mutuo acuerdo, que será liquidada y cancelada por mensualidades vencidas de conformidad con la modalidad establecida por LA UNIVERSIDAD. Adicionalmente, LA UNIVERSIDAD reconocerá a EL PERSONAL ACADÉMICO los demás derechos y beneficios establecidos en la ley.'), 'J');
+    $pdf->Ln(12);
+    $pdf->MultiCell(0, 5, utf8_decode('De la remuneración mensual correspondiente se realizarán previamente las deducciones y descuentos impuestos por la ley, por orden judicial o por autorización expresa de EL PERSONAL ACADÉMICO.'), 'J');
+    $pdf->Ln(6);
+
+    $pdf->SetFont('helvetica', 'B', 9);
+    $pdf->Cell(0, 6, utf8_decode("SÉPTIMA. - PLAZO DEL CONTRATO:"), 0, 0, 'L');
+    $pdf->Ln(6);
+    $pdf->SetFont('helvetica', '', 9);
+    $$pdf->MultiCell(0, 5, utf8_decode('El presente contrato de trabajo tendrá una duración indefinida y regirá a partir del '.date('j', strtotime($fecha_inicio)).' de '.$meses[date('n', strtotime($fecha_inicio))-1].' de '.date('Y', strtotime($fecha_inicio)).'.'), 'J'); 
+    $pdf->Ln(6);
+
+    $pdf->SetFont('helvetica', 'B', 9);
+    $pdf->Cell(0, 6, utf8_decode("OCTAVA. - TERMINACIÓN ANTICIPADA:"), 0, 0, 'L');
+    $pdf->Ln(6);
+    $pdf->SetFont('helvetica', '', 9);
+    $pdf->MultiCell(0, 5, utf8_decode('El presente contrato podrá darse por terminado cuando EL PERSONAL ACADÉMICO incurra en incumplimiento de las obligaciones establecidas en la legislación vigente, en el presente contrato o en la normativa institucional de LA UNIVERSIDAD, previo el cumplimiento del procedimiento legal correspondiente y de conformidad con las causales previstas en la legislación ecuatoriana aplicable.'), 'J');
+    $pdf->Ln(6);
+
+    $pdf->SetFont('helvetica', 'B', 9);
+    $pdf->Cell(0, 6, utf8_decode("NOVENA. - PERÍODO DE PRUEBA:"), 0, 0, 'L');
+    $pdf->Ln(6);
+    $pdf->SetFont('helvetica', '', 9);
+    $pdf->MultiCell(0, 5, utf8_decode('Las partes acuerdan establecer un período de prueba de noventa (90) días, contados a partir de la fecha de inicio de la relación laboral, de conformidad con lo dispuesto en el Código del Trabajo.'), 'J');
+    $pdf->Ln(6);
+    $pdf->MultiCell(0, 5, utf8_decode('Durante el período de prueba, cualquiera de las partes podrá dar por terminada la relación laboral de manera unilateral, sin necesidad de invocar causa y sin que ello genere derecho al pago de indemnización, sin perjuicio de los demás derechos laborales que correspondan y observando las disposiciones legales aplicables.'), 'J');
+    $pdf->Ln(6);
+
+    $pdf->SetFont('helvetica', 'B', 9);
+    $pdf->Cell(0, 6, utf8_decode("DÉCIMA. - VACACIONES: "), 0, 0, 'L');
+    $pdf->Ln(6);
+    $pdf->SetFont('helvetica', '', 9);
+    $pdf->MultiCell(0, 5, utf8_decode('EL PERSONAL ACADÉMICO tendrá derecho a las vacaciones que correspondan, en proporción al tiempo efectivamente laborado durante la vigencia del presente contrato, de conformidad con el Código del Trabajo y demás normativa aplicable.'), 'J');
+    $pdf->Ln(6);
+
+    $pdf->SetFont('helvetica', 'B', 9);
+    $pdf->Cell(0, 6, utf8_decode("DÉCIMA PRIMERA. - LEGISLACIÓN APLICABLE:"), 0, 0, 'L');
+    $pdf->Ln(6);
+    $pdf->SetFont('helvetica', '', 9);
+    $pdf->MultiCell(0, 5, utf8_decode('En todo lo no previsto en el presente contrato, las partes se sujetarán a las disposiciones de la legislación ecuatoriana vigente, particularmente a lo establecido en el Código del Trabajo, así como a la normativa especial aplicable al personal académico de las instituciones de educación superior particulares y a los reglamentos internos de LA UNIVERSIDAD.'), 'J');
+    $pdf->Ln(6);
+
+    $pdf->SetFont('helvetica', 'B', 9);
+    $pdf->Cell(0, 6, utf8_decode("DÉCIMA SEGUNDA. - JURISDICCIÓN Y COMPETENCIA:"), 0, 0, 'L');
+    $pdf->Ln(6);
+    $pdf->SetFont('helvetica', '', 9);
+    $pdf->MultiCell(0, 5, utf8_decode('En caso de controversia derivada de la interpretación, ejecución o terminación del presente contrato, que no pueda ser resuelta de manera directa entre las partes, estas se someten a la jurisdicción y competencia de los jueces de trabajo de la provincia de Manabí, con sede en el cantón Portoviejo, y al procedimiento establecido en la legislación laboral ecuatoriana.'), 'J');
+    $pdf->Ln(6);
+
+    $pdf->SetFont('helvetica', 'B', 9);
+    $pdf->Cell(0, 6, utf8_decode("DDÉCIMA TERCERA. - PROTECCIÓN DE DATOS PERSONALES:"), 0, 0, 'L');
+    $pdf->Ln(6);
+    $pdf->SetFont('helvetica', '', 9);
+    $pdf->MultiCell(0, 5, utf8_decode('Con la suscripción del presente contrato, EL PERSONAL ACADÉMICO autoriza a LA UNIVERSIDAD al tratamiento de sus datos personales para fines relacionados con la gestión laboral, administrativa y académica derivados de su relación de trabajo, de conformidad con la normativa vigente y con la Ley Orgánica de Protección de Datos Personales de Ecuador.'), 'J');
+    $pdf->Ln(6);
+
+    $pdf->SetFont('helvetica', 'B', 9);
+    $pdf->Cell(0, 6, utf8_decode("DÉCIMA CUARTA. - CONFIDENCIALIDAD:"), 0, 0, 'L');
+    $pdf->Ln(6);
+    $pdf->SetFont('helvetica', '', 9);
+    $pdf->MultiCell(0, 5, utf8_decode('EL PERSONAL ACADÉMICO se compromete a mantener absoluta confidencialidad respecto de la información institucional, académica, administrativa o de cualquier otra naturaleza a la que tenga acceso con ocasión del ejercicio de sus funciones, obligándose a no divulgarla por ningún medio, sea escrito, impreso, verbal o digital.'), 'J');
+    $pdf->Ln(6);
+    $pdf->MultiCell(0, 5, utf8_decode('El incumplimiento de esta obligación podrá dar lugar a las responsabilidades civiles, administrativas o penales previstas en la legislación vigente.'), 'J');
+    $pdf->Ln(6);
+
+    $pdf->SetFont('helvetica', 'B', 9);
+    $pdf->Cell(0, 6, utf8_decode("DÉCIMA CUARTA. - ACEPTACIÓN:"), 0, 0, 'L');
+    $pdf->Ln(6);
+    $pdf->SetFont('helvetica', '', 9);
+    $pdf->MultiCell(0, 5, utf8_decode('Las partes declaran haber leído y comprendido el contenido del presente contrato y, en señal de aceptación, lo ratifican en todas sus partes, sin reserva de ninguna naturaleza.'), 'J');
+    $pdf->Ln(6);
+    $pdf->MultiCell(0, 5, utf8_decode('Para constancia de lo cual, lo firman en dos ejemplares de igual tenor y valor, en la ciudad de Portoviejo, a los '.date('j', strtotime(utf8_decode($fecha_inicio))).' días del mes de '.$meses[date('n', strtotime(utf8_decode($fecha_inicio)))-1].' de '.date('Y', strtotime(utf8_decode($fecha_inicio))).'.'), 'J');
+
+    $pdf->SetAutoPageBreak(1, 1);
+    
+    $pdf->Ln(30);
+    $pdf->SetFont('helvetica', '', 9);
+
+    $pdf->SetXY(22, $pdf->GetY());
+    $pdf->Cell(70, 4, utf8_decode("DR. JOSÉ LUIS CAGIGAL GARCÍA"), 0, 2, 'L');
+    $pdf->Cell(70, 4, "C.I.: 1702550524", 0, 2, 'L');
+    $pdf->Cell(70, 4, "PRORRECTOR", 0, 2, 'L');
+
+    $pdf->SetXY(125, $pdf->GetY()-12);
+    $pdf->Cell(70, 4, utf8_decode((($tratamiento!='') ? $tratamiento.' ' : '').$nombres.' '.$apellidos_paternos.' '.$apellidos_maternos), 0, 2, 'L');
+    $pdf->Cell(70, 4, utf8_decode("C.I.: ".$documento), 0, 2, 'L');
+    $pdf->Cell(70, 4, utf8_decode("EL PERSONAL ACADÉMICO"), 0, 2, 'L');
+    
+#AQUI TERMINA EL TIPO 1 INDEFINIDO
 
 }else if($id_tipo_contrato==6){
 
